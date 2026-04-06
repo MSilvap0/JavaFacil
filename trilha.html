@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha Java — JavaFácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="trilha.css">
+  <link rel="stylesheet" href="auth-modal.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo">☕ JavaFácil</a>
+    <div class="header-stats">
+      <span class="stat" id="stat-xp">⚡ <b id="xp-val">0</b> XP</span>
+      <span class="stat" id="stat-streak">🔥 <b id="streak-val">0</b></span>
+      <span class="stat" id="stat-lives">❤️ <b id="lives-val">5</b></span>
+    </div>
+    <button class="btn-theme" id="btn-theme" title="Mudar tema">🎨</button>
+    <a href="ide.html" class="btn-ide">🚀 Abrir IDE</a>
+  </header>
+
+  <!-- THEME PANEL -->
+  <div class="theme-panel" id="theme-panel">
+    <div class="theme-panel-title">Escolha o tema</div>
+    <div class="theme-grid">
+      <div class="theme-option active" data-theme="default">
+        <div class="theme-preview" style="background:#f0f4ff">
+          <div class="theme-dot" style="background:#4f46e5"></div>
+          <div class="theme-dot" style="background:#22c55e"></div>
+          <div class="theme-dot" style="background:#fbbf24"></div>
+        </div>
+        <span style="color:#2d2d3a">☀️ Padrão</span>
+      </div>
+      <div class="theme-option" data-theme="dark">
+        <div class="theme-preview" style="background:#0f0f1a">
+          <div class="theme-dot" style="background:#818cf8"></div>
+          <div class="theme-dot" style="background:#4ade80"></div>
+          <div class="theme-dot" style="background:#fcd34d"></div>
+        </div>
+        <span style="color:#e2e8f0">🌙 Dark</span>
+      </div>
+      <div class="theme-option" data-theme="blue">
+        <div class="theme-preview" style="background:#0a192f">
+          <div class="theme-dot" style="background:#64ffda"></div>
+          <div class="theme-dot" style="background:#3b82f6"></div>
+          <div class="theme-dot" style="background:#ffd166"></div>
+        </div>
+        <span style="color:#ccd6f6">🌊 Ocean</span>
+      </div>
+      <div class="theme-option" data-theme="forest">
+        <div class="theme-preview" style="background:#0d1f0d">
+          <div class="theme-dot" style="background:#7fff00"></div>
+          <div class="theme-dot" style="background:#ffd700"></div>
+          <div class="theme-dot" style="background:#5cb800"></div>
+        </div>
+        <span style="color:#d4edda">🌿 Forest</span>
+      </div>
+      <div class="theme-option" data-theme="sunset">
+        <div class="theme-preview" style="background:#1a0a00">
+          <div class="theme-dot" style="background:#ff6b35"></div>
+          <div class="theme-dot" style="background:#ffbf69"></div>
+          <div class="theme-dot" style="background:#ff9f1c"></div>
+        </div>
+        <span style="color:#ffe8cc">🌅 Sunset</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Seu Progresso</div>
+        <div class="progress-ring-wrap">
+          <svg class="progress-ring" width="100" height="100">
+            <circle class="ring-bg" cx="50" cy="50" r="40"/>
+            <circle class="ring-fill" id="ring-fill" cx="50" cy="50" r="40"/>
+          </svg>
+          <div class="ring-label"><span id="ring-pct">0</span>%</div>
+        </div>
+        <div class="sidebar-stat-row">
+          <span>Lições completas</span>
+          <b id="done-count">0</b>
+        </div>
+        <div class="sidebar-stat-row">
+          <span>Total de lições</span>
+          <b id="total-count">0</b>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Módulos</div>
+        <nav class="module-nav" id="module-nav"></nav>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Conquistas</div>
+        <div class="badges" id="badges"></div>
+      </div>
+    </aside>
+
+    <!-- MAIN TRAIL -->
+    <main class="trail-main">
+      <div class="trail-header">
+        <h1>Trilha Java</h1>
+        <p>Aprenda Java do zero ao avançado, passo a passo</p>
+      </div>
+      <div class="trail" id="trail"></div>
+    </main>
+
+  </div>
+
+  <!-- LESSON MODAL -->
+  <div class="modal-overlay" id="modal" style="display:none">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- XP TOAST -->
+  <div class="xp-toast" id="xp-toast"></div>
+
+  <script src="trilha.js"></script>
+  <script src="auth.js"></script>
+  <script src="guard.js"></script>
+  <script src="auth-modal.js"></script>
+</body>
+</html>

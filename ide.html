@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.5, maximum-scale=5.0, user-scalable=yes">
+  <title>JavaFácil IDE</title>
+  <link rel="stylesheet" href="ide.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- TITLE BAR -->
+    <div class="title-bar" id="title-bar">
+      <div class="title-bar-left">
+        <span class="logo">☕ JavaFácil IDE</span>
+        <nav class="menu-bar" id="menu-bar">
+          <div class="menu-item" data-menu="file">File
+            <div class="dropdown">
+              <div class="dropdown-item" data-action="new-file">New File <span>Ctrl+N</span></div>
+              <div class="dropdown-item" data-action="new-folder">New Folder</div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="save">Save <span>Ctrl+S</span></div>
+              <div class="dropdown-item" data-action="save-all">Save All <span>Ctrl+Shift+S</span></div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="home">← Voltar ao JavaFácil</div>
+            </div>
+          </div>
+          <div class="menu-item" data-menu="edit">Edit
+            <div class="dropdown">
+              <div class="dropdown-item" data-action="undo">Undo <span>Ctrl+Z</span></div>
+              <div class="dropdown-item" data-action="redo">Redo <span>Ctrl+Y</span></div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="find">Find <span>Ctrl+F</span></div>
+              <div class="dropdown-item" data-action="replace">Replace <span>Ctrl+H</span></div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="format">Format Document <span>Shift+Alt+F</span></div>
+              <div class="dropdown-item" data-action="comment">Toggle Comment <span>Ctrl+/</span></div>
+            </div>
+          </div>
+          <div class="menu-item" data-menu="run">Run
+            <div class="dropdown">
+              <div class="dropdown-item" data-action="run">▶ Run Java <span>Ctrl+Enter</span></div>
+              <div class="dropdown-item" data-action="run-input">▶ Run with Input</div>
+              <div class="dropdown-item" data-action="stop">■ Stop</div>
+            </div>
+          </div>
+          <div class="menu-item" data-menu="view">View
+            <div class="dropdown">
+              <div class="dropdown-item" data-action="toggle-sidebar">Toggle Sidebar <span>Ctrl+B</span></div>
+              <div class="dropdown-item" data-action="toggle-panel">Toggle Panel <span>Ctrl+`</span></div>
+              <div class="dropdown-item" data-action="toggle-minimap">Toggle Minimap</div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="zoom-in">Zoom In <span>Ctrl++</span></div>
+              <div class="dropdown-item" data-action="zoom-out">Zoom Out <span>Ctrl+-</span></div>
+              <div class="dropdown-item" data-action="zoom-reset">Reset Zoom <span>Ctrl+0</span></div>
+              <div class="dropdown-sep"></div>
+              <div class="dropdown-item" data-action="fullscreen">Fullscreen <span>F11</span></div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="title-bar-center">
+        <span id="title-filename">Main.java — JavaFácil IDE</span>
+      </div>
+      <div class="title-bar-right">
+        <button class="run-btn" id="run-btn" title="Run Java (Ctrl+Enter)">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+          Run
+        </button>
+        <button class="run-input-btn" id="run-input-btn" title="Run with stdin">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+          Input
+        </button>
+        <button class="titlebar-icon-btn" id="btn-zoom-out" title="Afastar (Ctrl+-)">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 1a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM0 6.5a6.5 6.5 0 1111.65 4.013l3.418 3.419a.75.75 0 01-1.06 1.06l-3.42-3.418A6.5 6.5 0 010 6.5zm3.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 010-1.5z"/></svg>
+        </button>
+        <span id="zoom-label" style="font-size:10px;color:#969696;min-width:30px;text-align:center;cursor:default;user-select:none;" title="Duplo clique para resetar">100%</span>
+        <button class="titlebar-icon-btn" id="btn-zoom-in" title="Aproximar (Ctrl++)">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 1a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM0 6.5a6.5 6.5 0 1111.65 4.013l3.418 3.419a.75.75 0 01-1.06 1.06l-3.42-3.418A6.5 6.5 0 010 6.5zm6.5-3.25a.75.75 0 01.75.75v2h2a.75.75 0 010 1.5h-2v2a.75.75 0 01-1.5 0v-2h-2a.75.75 0 010-1.5h2v-2A.75.75 0 016.5 3.25z"/></svg>
+        </button>
+        <button class="titlebar-icon-btn" id="btn-fullscreen" title="Fullscreen (F11)">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 1h4v1.5h-2.5v2.5h-1.5v-4zm9 0h4v4h-1.5v-2.5h-2.5v-1.5zm-9 9h1.5v2.5h2.5v1.5h-4v-4zm10.5 2.5v-2.5h1.5v4h-4v-1.5h2.5z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN LAYOUT -->
+    <div class="main-layout">
+
+      <!-- ACTIVITY BAR -->
+      <div class="activity-bar">
+        <div class="activity-top">
+          <button class="activity-btn active" data-view="explorer" title="Explorer (Ctrl+Shift+E)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>
+          </button>
+          <button class="activity-btn" data-view="search" title="Search (Ctrl+Shift+F)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </button>
+          <button class="activity-btn" data-view="snippets" title="Java Snippets">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </button>
+        </div>
+        <div class="activity-bottom">
+          <button class="activity-btn" data-view="settings" title="Settings">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </button>
+          <a href="index.html" class="activity-btn home-btn" title="Voltar ao JavaFácil">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="sidebar" id="sidebar">
+
+        <!-- EXPLORER -->
+        <div class="sidebar-view active" id="view-explorer">
+          <div class="sidebar-header">
+            <span>EXPLORER</span>
+            <div class="sidebar-actions">
+              <button id="btn-new-file" title="New File">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M9 1H3a1 1 0 00-1 1v12a1 1 0 001 1h10a1 1 0 001-1V5L9 1zm0 1.5L12.5 5H9V2.5zM3 14V2h5v4h4v8H3z"/><path d="M8 7H7v2H5v1h2v2h1v-2h2V9H8V7z"/></svg>
+              </button>
+              <button id="btn-new-folder" title="New Folder">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M14.5 3H7.71l-.85-.85A.5.5 0 006.5 2h-5a.5.5 0 00-.5.5v11a.5.5 0 00.5.5h13a.5.5 0 00.5-.5v-10a.5.5 0 00-.5-.5zM14 13H2V3h4.29l.85.85A.5.5 0 007.5 4H14v9z"/><path d="M8 7H7v2H5v1h2v2h1v-2h2V9H8V7z"/></svg>
+              </button>
+              <button id="btn-refresh" title="Refresh">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M13.451 5.609l-.579-.939-1.068.812-.076.094c-.335.415-.927 1.341-1.124 2.876l1.016.125c.175-1.394.71-2.181.98-2.52l.032-.038.819-.41zM9.work 2.088l.984-.178-.354-1.964-.984.178.354 1.964zM4.48 3.67l-.837-.548-1.087 1.657.837.548L4.48 3.67zm-2.45 4.6H.986v2h1.044V8.27zm1.408 4.492l-.837.548 1.087 1.657.837-.548-1.087-1.657zm4.595 1.826l-.984-.178-.354 1.964.984.178.354-1.964zm4.514-1.826l-1.087 1.657.837.548 1.087-1.657-.837-.548zM14.97 8.27h-1.044v2h1.044V8.27z"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="project-root">
+            <div class="project-name" id="project-toggle">
+              <svg class="chevron open" width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M4 6l4 4 4-4"/></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="color:#dcb67a"><path d="M1 3.5A1.5 1.5 0 012.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0115 5.5v7a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 011 12.5v-9z"/></svg>
+              <span>PROJETO</span>
+            </div>
+            <div class="file-tree" id="file-tree"></div>
+          </div>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="sidebar-view" id="view-search">
+          <div class="sidebar-header"><span>SEARCH</span></div>
+          <div class="search-box">
+            <div class="search-input-wrap">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><circle cx="6.5" cy="6.5" r="5.5"/><path d="M11.5 11.5l3 3"/></svg>
+              <input type="text" id="search-input" placeholder="Search" />
+            </div>
+            <div class="search-input-wrap">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3h14v2H1zm2 4h10v2H3zm2 4h6v2H5z"/></svg>
+              <input type="text" id="replace-input" placeholder="Replace" />
+            </div>
+            <div class="search-actions">
+              <button id="btn-search">Find All</button>
+              <button id="btn-replace-all">Replace All</button>
+            </div>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+
+        <!-- SNIPPETS -->
+        <div class="sidebar-view" id="view-snippets">
+          <div class="sidebar-header"><span>JAVA SNIPPETS</span></div>
+          <div class="snippets-list" id="snippets-list"></div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="sidebar-view" id="view-settings">
+          <div class="sidebar-header"><span>SETTINGS</span></div>
+          <div class="settings-content">
+            <div class="setting-group">
+              <div class="setting-label">Editor: Font Size</div>
+              <div class="setting-row">
+                <input type="range" id="font-size-slider" min="10" max="28" value="16">
+                <span id="font-size-val">16</span>
+              </div>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Color Theme</div>
+              <select id="theme-select">
+                <option value="vs-dark">Dark (Default)</option>
+                <option value="vs">Light</option>
+                <option value="hc-black">High Contrast</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Editor: Word Wrap</div>
+              <select id="wordwrap-select">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Editor: Tab Size</div>
+              <select id="tabsize-select">
+                <option value="2">2</option>
+                <option value="4" selected>4</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Editor: Minimap</div>
+              <label class="toggle-label">
+                <input type="checkbox" id="minimap-toggle" checked>
+                <span class="toggle-text">Enabled</span>
+              </label>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Editor: Line Numbers</div>
+              <select id="linenumbers-select">
+                <option value="on">On</option>
+                <option value="off">Off</option>
+                <option value="relative">Relative</option>
+              </select>
+            </div>
+            <div class="setting-group">
+              <div class="setting-label">Java Runner</div>
+              <select id="runner-select">
+                <option value="piston">Piston API (recomendado)</option>
+                <option value="judge0">Judge0 API</option>
+                <option value="simulate">Simulador local</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR RESIZE -->
+      <div class="sidebar-resize" id="sidebar-resize"></div>
+
+      <!-- EDITOR + PANEL -->
+      <div class="editor-panel-wrapper" id="editor-panel-wrapper">
+
+        <!-- TABS BAR -->
+        <div class="editor-tabs-bar" id="editor-tabs-bar">
+          <div class="tabs-list" id="tabs-list"></div>
+          <div class="tabs-actions">
+            <button id="btn-split" title="Split Editor">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M7 1H1v14h6V1zm1 0v14h7V1H8zM0 1a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H1a1 1 0 01-1-1V1z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb" id="breadcrumb">
+          <span class="bc-item">PROJETO</span>
+          <span class="bc-sep">›</span>
+          <span class="bc-item active" id="bc-file">Main.java</span>
+        </div>
+
+        <!-- EDITOR -->
+        <div class="editor-wrapper" id="editor-wrapper">
+          <div id="monaco-editor"></div>
+          <div class="editor-loading" id="editor-loading">
+            <div class="spinner"></div>
+            <span>Carregando editor...</span>
+          </div>
+        </div>
+
+        <!-- PANEL RESIZE -->
+        <div class="panel-resize-handle" id="panel-resize-handle"></div>
+
+        <!-- PANEL -->
+        <div class="panel" id="panel">
+          <div class="panel-header">
+            <div class="panel-tabs">
+              <button class="panel-tab active" data-panel="terminal">TERMINAL</button>
+              <button class="panel-tab" data-panel="output">OUTPUT</button>
+              <button class="panel-tab" data-panel="problems">PROBLEMS <span class="badge" id="problems-badge"></span></button>
+            </div>
+            <div class="panel-controls">
+              <button id="btn-new-terminal" title="New Terminal">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M9 1H3a1 1 0 00-1 1v12a1 1 0 001 1h10a1 1 0 001-1V5L9 1zm0 1.5L12.5 5H9V2.5zM3 14V2h5v4h4v8H3z"/><path d="M8 7H7v2H5v1h2v2h1v-2h2V9H8V7z"/></svg>
+              </button>
+              <button id="panel-clear" title="Clear">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 000-2h-3a1 1 0 00-1-1h-3a1 1 0 00-1 1H2.5zm3 4a.5.5 0 011 0v7a.5.5 0 01-1 0V5zm3 0a.5.5 0 011 0v7a.5.5 0 01-1 0V5z"/></svg>
+              </button>
+              <button id="panel-maximize" title="Maximize Panel">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M1.5 1h13l.5.5v13l-.5.5h-13l-.5-.5v-13l.5-.5zM2 2v12h12V2H2z"/></svg>
+              </button>
+              <button id="panel-toggle" title="Close Panel (Ctrl+`)">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 11L3 6h10l-5 5z"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="panel-pane active" id="pane-terminal">
+              <div id="xterm-container"></div>
+            </div>
+            <div class="panel-pane" id="pane-output">
+              <div class="output-toolbar">
+                <span id="output-status"></span>
+                <span id="output-time"></span>
+                <span id="output-memory"></span>
+              </div>
+              <pre id="output-content" class="output-pre"></pre>
+            </div>
+            <div class="panel-pane" id="pane-problems">
+              <div id="problems-list" class="problems-list"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+      <div class="status-left">
+        <span class="status-item" id="status-branch">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5z"/></svg>
+          main
+        </span>
+        <span class="status-item" id="status-errors">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="#f85149"/><path d="M7.25 4.5h1.5v4h-1.5V4.5zm0 5h1.5v1.5h-1.5V9.5z" fill="white"/></svg>
+          <span id="error-count">0</span>
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" style="margin-left:4px"><circle cx="8" cy="8" r="7" fill="#fbba42"/><path d="M7.25 4.5h1.5v4h-1.5V4.5zm0 5h1.5v1.5h-1.5V9.5z" fill="white"/></svg>
+          <span id="warn-count">0</span>
+        </span>
+      </div>
+      <div class="status-right">
+        <span class="status-item" id="status-cursor">Ln 1, Col 1</span>
+        <span class="status-item" id="status-selection"></span>
+        <span class="status-item" id="status-indent">Spaces: 4</span>
+        <span class="status-item">UTF-8</span>
+        <span class="status-item">LF</span>
+        <span class="status-item" id="status-lang">Java</span>
+        <span class="status-item status-run" id="status-run-state"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INPUT MODAL -->
+  <div class="modal-overlay" id="modal-input" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <span>Standard Input (stdin)</span>
+        <button class="modal-close" id="modal-input-close">×</button>
+      </div>
+      <textarea id="stdin-input" placeholder="Digite o input do programa aqui...&#10;Cada linha = uma entrada"></textarea>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-input-cancel">Cancelar</button>
+        <button class="btn-primary" id="modal-input-run">▶ Run</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RENAME MODAL -->
+  <div class="modal-overlay" id="modal-rename" style="display:none">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <span>Renomear Arquivo</span>
+        <button class="modal-close" id="modal-rename-close">×</button>
+      </div>
+      <input type="text" id="rename-input" placeholder="Novo nome..." />
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-rename-cancel">Cancelar</button>
+        <button class="btn-primary" id="modal-rename-ok">Renomear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW FILE MODAL -->
+  <div class="modal-overlay" id="modal-newfile" style="display:none">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <span>Novo Arquivo</span>
+        <button class="modal-close" id="modal-newfile-close">×</button>
+      </div>
+      <input type="text" id="newfile-input" placeholder="Ex: MinhaClasse.java" />
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-newfile-cancel">Cancelar</button>
+        <button class="btn-primary" id="modal-newfile-ok">Criar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEXT MENU -->
+  <div class="context-menu" id="context-menu" style="display:none">
+    <div class="ctx-item" data-action="ctx-open">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3.5A1.5 1.5 0 012.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0115 5.5v7a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 011 12.5v-9z"/></svg>
+      Abrir
+    </div>
+    <div class="ctx-item" data-action="ctx-rename">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M13.23 1h-1.46L3.52 9.25l-.16.22L1 13.59 2.41 15l4.12-2.36.22-.16L15 4.23V2.77L13.23 1zM2.41 13.59l1.51-3 1.45 1.45-2.96 1.55zm3.83-2.06L4.47 9.76l8-8 1.77 1.77-8 8z"/></svg>
+      Renomear
+    </div>
+    <div class="ctx-item" data-action="ctx-duplicate">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H4zm0 1h8a1 1 0 011 1v8a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1z"/></svg>
+      Duplicar
+    </div>
+    <div class="ctx-sep"></div>
+    <div class="ctx-item ctx-danger" data-action="ctx-delete">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor"><path d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 000-2h-3a1 1 0 00-1-1h-3a1 1 0 00-1 1H2.5zm3 4a.5.5 0 011 0v7a.5.5 0 01-1 0V5zm3 0a.5.5 0 011 0v7a.5.5 0 01-1 0V5z"/></svg>
+      Deletar
+    </div>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div class="notification" id="notification" style="display:none"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs/loader.js"></script>
+  <script src="auth.js"></script>
+  <script src="guard.js"></script>
+  <script src="ide.js"></script>
+</body>
+</html>

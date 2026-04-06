@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar — JavaFácil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <script>(function(){var t=localStorage.getItem('javafacil_theme');if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t);})();</script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--t-bg, #f0f4ff);
+      color: var(--t-text, #0f172a);
+      padding: 16px;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(79,70,229,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 20%, rgba(34,197,94,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 60% 85%, rgba(251,191,36,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Floating coffee beans decoration */
+    .bean {
+      position: fixed;
+      font-size: 1.5rem;
+      opacity: 0.07;
+      animation: float linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      from { transform: translateY(110vh) rotate(0deg); }
+      to   { transform: translateY(-10vh) rotate(360deg); }
+    }
+
+    .card {
+      background: var(--t-bg2, #ffffff);
+      border: 2px solid var(--t-border, #e2e8f0);
+      border-radius: 28px;
+      padding: 44px 40px 36px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.12);
+      position: relative;
+      z-index: 1;
+      animation: cardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes cardIn {
+      from { transform: translateY(40px) scale(0.95); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .card-logo { text-align: center; font-size: 3.5rem; margin-bottom: 6px; }
+
+    .card-title {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--t-text, #0f172a);
+      margin-bottom: 4px;
+    }
+
+    .card-sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--t-text-s, #64748b);
+      margin-bottom: 28px;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: var(--t-bg3, #f1f5f9);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 9px;
+      border: none;
+      border-radius: 9px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--t-text-s, #64748b);
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .tab-btn.active {
+      background: var(--t-bg2, #fff);
+      color: var(--t-text, #0f172a);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* Error */
+    .error-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      display: none;
+      animation: shake 0.3s ease;
+    }
+
+    .error-box.show { display: block; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25%      { transform: translateX(-6px); }
+      75%      { transform: translateX(6px); }
+    }
+
+    /* Success */
+    .success-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #16a34a;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .success-box.show { display: block; }
+
+    /* Form */
+    .form { display: flex; flex-direction: column; gap: 12px; }
+
+    .input-wrap { position: relative; }
+
+    .input-icon {
+      position: absolute;
+      left: 14px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .inp {
+      width: 100%;
+      padding: 13px 14px 13px 42px;
+      border: 2px solid var(--t-border, #e2e8f0);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--t-bg3, #f8fafc);
+      color: var(--t-text, #0f172a);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+
+    .inp:focus {
+      border-color: #4f46e5;
+      background: var(--t-bg2, #fff);
+      box-shadow: 0 0 0 3px rgba(79,70,229,0.12);
+    }
+
+    .inp::placeholder { color: var(--t-text-s, #94a3b8); }
+
+    /* Submit */
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      border-bottom: 4px solid #3730a3;
+      transition: filter 0.1s, transform 0.1s;
+      font-family: 'Inter', sans-serif;
+      margin-top: 4px;
+    }
+
+    .btn-submit:hover:not(:disabled) { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-submit:active:not(:disabled) { transform: translateY(2px); border-bottom-width: 2px; }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* Theme toggle */
+    .theme-wrap {
+      position: fixed;
+      top: 16px; right: 16px;
+      z-index: 100;
+    }
+
+    .btn-theme-toggle {
+      background: var(--t-bg2, #fff);
+      border: 2px solid var(--t-border, #e2e8f0);
+      color: var(--t-text, #0f172a);
+      font-size: 1.1rem;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s;
+    }
+
+    .btn-theme-toggle:hover { transform: rotate(20deg) scale(1.1); }
+
+    /* Guard */
+    #page-guard {
+      position: fixed; inset: 0;
+      background: var(--t-bg, #f0f4ff);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; font-size: 3rem;
+      transition: opacity 0.3s;
+    }
+
+    #page-guard.hidden { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Floating beans -->
+  <div class="bean" style="left:10%;animation-duration:12s;animation-delay:0s">☕</div>
+  <div class="bean" style="left:30%;animation-duration:18s;animation-delay:4s">☕</div>
+  <div class="bean" style="left:55%;animation-duration:14s;animation-delay:2s">☕</div>
+  <div class="bean" style="left:75%;animation-duration:20s;animation-delay:7s">☕</div>
+  <div class="bean" style="left:90%;animation-duration:16s;animation-delay:1s">☕</div>
+
+  <div id="page-guard">☕</div>
+
+  <div class="theme-wrap">
+    <button class="btn-theme-toggle" id="btn-theme" title="Mudar tema">🎨</button>
+  </div>
+
+  <div class="theme-panel" id="theme-panel">
+    <div class="theme-panel-title">Escolha o tema</div>
+    <div class="theme-grid">
+      <div class="theme-option active" data-theme="default"><div class="theme-preview" style="background:#f0f4ff"><div class="theme-dot" style="background:#4f46e5"></div><div class="theme-dot" style="background:#22c55e"></div><div class="theme-dot" style="background:#fbbf24"></div></div><span style="color:#2d2d3a">☀️ Padrão</span></div>
+      <div class="theme-option" data-theme="dark"><div class="theme-preview" style="background:#0f0f1a"><div class="theme-dot" style="background:#818cf8"></div><div class="theme-dot" style="background:#4ade80"></div><div class="theme-dot" style="background:#fcd34d"></div></div><span style="color:#e2e8f0">🌙 Dark</span></div>
+      <div class="theme-option" data-theme="blue"><div class="theme-preview" style="background:#0a192f"><div class="theme-dot" style="background:#64ffda"></div><div class="theme-dot" style="background:#3b82f6"></div><div class="theme-dot" style="background:#ffd166"></div></div><span style="color:#ccd6f6">🌊 Ocean</span></div>
+      <div class="theme-option" data-theme="forest"><div class="theme-preview" style="background:#0d1f0d"><div class="theme-dot" style="background:#7fff00"></div><div class="theme-dot" style="background:#ffd700"></div><div class="theme-dot" style="background:#5cb800"></div></div><span style="color:#d4edda">🌿 Forest</span></div>
+      <div class="theme-option" data-theme="sunset"><div class="theme-preview" style="background:#1a0a00"><div class="theme-dot" style="background:#ff6b35"></div><div class="theme-dot" style="background:#ffbf69"></div><div class="theme-dot" style="background:#ff9f1c"></div></div><span style="color:#ffe8cc">🌅 Sunset</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-logo">☕</div>
+    <div class="card-title">JavaFácil</div>
+    <div class="card-sub">Sua jornada Java começa aqui</div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-login" onclick="setMode(false)">Entrar</button>
+      <button class="tab-btn" id="tab-register" onclick="setMode(true)">Criar conta</button>
+    </div>
+
+    <div class="error-box" id="error-box"></div>
+    <div class="success-box" id="success-box"></div>
+
+    <form class="form" id="login-form">
+      <div class="input-wrap" id="name-wrap" style="display:none">
+        <span class="input-icon">👤</span>
+        <input class="inp" id="inp-name" type="text" placeholder="Seu nome" autocomplete="name">
+      </div>
+      <div class="input-wrap">
+        <span class="input-icon">📧</span>
+        <input class="inp" id="inp-email" type="email" placeholder="seu@email.com" autocomplete="email" required>
+      </div>
+      <div class="input-wrap">
+        <span class="input-icon">🔒</span>
+        <input class="inp" id="inp-pass" type="password" placeholder="Senha (mín. 6 caracteres)" autocomplete="current-password" required minlength="6">
+      </div>
+      <button class="btn-submit" type="submit" id="btn-submit">Entrar</button>
+    </form>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="theme.js"></script>
+  <script>
+    const REDIRECT = localStorage.getItem('jf_redirect') || 'index.html';
+    let isRegister = false;
+
+    // Check if already logged in
+    JFAuth.onAuthChange((user) => {
+      if (user) {
+        localStorage.removeItem('jf_redirect');
+        window.location.href = REDIRECT;
+      } else {
+        const g = document.getElementById('page-guard');
+        g.classList.add('hidden');
+        setTimeout(() => g.remove(), 350);
+      }
+    });
+
+    JFAuth.init();
+
+    function setMode(reg) {
+      isRegister = reg;
+      document.getElementById('tab-login').classList.toggle('active', !reg);
+      document.getElementById('tab-register').classList.toggle('active', reg);
+      document.getElementById('btn-submit').textContent = reg ? 'Criar conta' : 'Entrar';
+      document.getElementById('name-wrap').style.display = reg ? '' : 'none';
+      document.getElementById('inp-pass').placeholder = reg ? 'Crie uma senha (mín. 6 caracteres)' : 'Senha';
+      document.getElementById('inp-pass').autocomplete = reg ? 'new-password' : 'current-password';
+      hideMessages();
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideMessages();
+
+      const email = document.getElementById('inp-email').value.trim();
+      const pass  = document.getElementById('inp-pass').value;
+      const name  = document.getElementById('inp-name').value.trim();
+      const btn   = document.getElementById('btn-submit');
+
+      if (!email || !pass) return;
+
+      btn.textContent = '⏳ Aguarde...';
+      btn.disabled = true;
+
+      try {
+        if (isRegister) {
+          if (!name) { showError('Digite seu nome.'); btn.textContent = 'Criar conta'; btn.disabled = false; return; }
+          await JFAuth.register(name, email, pass);
+        } else {
+          await JFAuth.login(email, pass, false);
+        }
+        // onAuthChange will redirect
+      } catch(err) {
+        showError(friendlyError(err.code));
+        btn.textContent = isRegister ? 'Criar conta' : 'Entrar';
+        btn.disabled = false;
+      }
+    });
+
+    function showError(msg) {
+      const el = document.getElementById('error-box');
+      el.textContent = msg;
+      el.classList.add('show');
+      document.getElementById('success-box').classList.remove('show');
+    }
+
+    function hideMessages() {
+      document.getElementById('error-box').classList.remove('show');
+      document.getElementById('success-box').classList.remove('show');
+    }
+
+    function friendlyError(code) {
+      const map = {
+        'auth/user-not-found':       '❌ Email não encontrado. Crie uma conta!',
+        'auth/wrong-password':       '❌ Senha incorreta.',
+        'auth/email-already-in-use': '❌ Este email já está cadastrado. Faça login.',
+        'auth/weak-password':        '❌ Senha muito fraca. Use pelo menos 6 caracteres.',
+        'auth/invalid-email':        '❌ Email inválido.',
+      };
+      return map[code] || '❌ Erro ao fazer login. Tente novamente.';
+    }
+  </script>
+</body>
+</html>

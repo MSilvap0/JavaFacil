@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaFácil - Aprenda Java e Lógica de Programação | Trilhas, Vídeos e Exercícios</title>
+    <meta name="description" content="Aprenda Java do zero com trilhas completas, vídeos recomendados e exercícios práticos. Iniciante, intermediário e avançado. Comece agora!">
+    <meta property="og:title" content="JavaFácil - Sua Jornada no Java">
+    <meta property="og:description" content="Trilhas de aprendizado, vídeos de Java e lógica, exercícios práticos para todos os níveis.">
+    <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHZpZXdCb3g9IjAgMCAxMjAwIDYzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjMwIiBmaWxsPSIjRkZGRjAwIi8+CjxwYXRoIGQ9Ik0wIDBoMTIwMHY2MzBoLTEyMDB6IiBmaWxsPSIjMDAwMDAwIiBmaWxsLW9wYWNpdHk9IjAuMiIvPgo8L3N2Zz4=">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="auth-modal.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Apply theme before paint to avoid flash -->
+    <script>
+      (function(){var t=localStorage.getItem('javafacil_theme');if(t&&t!=='default')document.documentElement.setAttribute('data-theme',t);})();
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <nav class="nav-container" role="navigation">
+            <div class="logo">
+                <h1>
+                    <span class="logo-icon">☕</span>
+                    JavaFácil
+                </h1>
+            </div>
+            <div class="nav-right">
+                <button class="btn-theme-toggle" id="btn-theme" title="Mudar tema" aria-label="Mudar tema">🎨</button>
+                <button class="mobile-menu-toggle" aria-label="Abrir menu mobile" aria-expanded="false">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- THEME PANEL -->
+    <div class="theme-panel" id="theme-panel">
+        <div class="theme-panel-title">Escolha o tema</div>
+        <div class="theme-grid">
+            <div class="theme-option active" data-theme="default">
+                <div class="theme-preview" style="background:#ffffff">
+                    <div class="theme-dot" style="background:#F7DF1E"></div>
+                    <div class="theme-dot" style="background:#1E3A8A"></div>
+                    <div class="theme-dot" style="background:#10B981"></div>
+                </div>
+                <span>☀️ Padrão</span>
+            </div>
+            <div class="theme-option" data-theme="dark">
+                <div class="theme-preview" style="background:#0f0f1a">
+                    <div class="theme-dot" style="background:#818cf8"></div>
+                    <div class="theme-dot" style="background:#4ade80"></div>
+                    <div class="theme-dot" style="background:#fcd34d"></div>
+                </div>
+                <span>🌙 Dark</span>
+            </div>
+            <div class="theme-option" data-theme="blue">
+                <div class="theme-preview" style="background:#0a192f">
+                    <div class="theme-dot" style="background:#64ffda"></div>
+                    <div class="theme-dot" style="background:#3b82f6"></div>
+                    <div class="theme-dot" style="background:#ffd166"></div>
+                </div>
+                <span>🌊 Ocean</span>
+            </div>
+            <div class="theme-option" data-theme="forest">
+                <div class="theme-preview" style="background:#0d1f0d">
+                    <div class="theme-dot" style="background:#7fff00"></div>
+                    <div class="theme-dot" style="background:#ffd700"></div>
+                    <div class="theme-dot" style="background:#5cb800"></div>
+                </div>
+                <span>🌿 Forest</span>
+            </div>
+            <div class="theme-option" data-theme="sunset">
+                <div class="theme-preview" style="background:#1a0a00">
+                    <div class="theme-dot" style="background:#ff6b35"></div>
+                    <div class="theme-dot" style="background:#ffbf69"></div>
+                    <div class="theme-dot" style="background:#ff9f1c"></div>
+                </div>
+                <span>🌅 Sunset</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <main>
+    <section id="home" class="hero" role="main">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title animate-slide">Domine Java do <span class="highlight">zero ao avançado</span></h2>
+                <p class="hero-subtitle animate-slide delay-1">Trilhas completas, vídeos selecionados e exercícios práticos para você virar um programador Java de verdade.</p>
+                <div class="hero-actions animate-slide delay-2">
+<a href="ide.html" class="cta-button primary large">🚀 Abrir IDE JavaFácil Pro</a>
+<a href="trilha.html" class="cta-button secondary large">🗺️ Ver Trilha de Aprendizagem</a>
+                    <button class="cta-button secondary large" onclick="scrollToSection('videos')">Ver vídeos</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lições e Problemas -->
+
+
+
+    <!-- Lógica de Programação -->
+    <section id="logica" class="logica section">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title animate-slide">Lógica de Programação</h2>
+                <p class="section-description animate-slide delay-1">Domine os conceitos fundamentais antes do Java</p>
+            </header>
+            <div class="logica-grid">
+                <div class="logica-item animate-slide delay-1" data-categoria="logica">
+                    <div class="logica-icon">🎯</div>
+                    <h3>Algoritmos</h3>
+                    <p>Aprenda a pensar como programador e criar soluções passo a passo</p>
+                </div>
+                <div class="logica-item animate-slide delay-2" data-categoria="logica">
+                    <div class="logica-icon">🔄</div>
+                    <h3>Laços e Iterações</h3>
+                    <p>Para, enquanto e faça: controle perfeitamente seus fluxos</p>
+                </div>
+                <div class="logica-item animate-slide delay-3" data-categoria="logica">
+                    <div class="logica-icon">⛓️</div>
+                    <h3>Estruturas de Dados</h3>
+                    <p>Arrays, listas e coleções: organize seus dados com eficiência</p>
+                </div>
+                <div class="logica-item animate-slide delay-4" data-categoria="logica">
+                    <div class="logica-icon">⚖️</div>
+                    <h3>Condicionais</h3>
+                    <p>If/else, switch: tome decisões inteligentes no código</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Controls de Filtro e Busca -->
+    <div class="search-controls">
+        <div class="container">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="🔍 Buscar vídeos, exercícios ou tópicos..." aria-label="Buscar conteúdo">
+                <div class="filters">
+                    <button class="filter-btn active" data-filtro="todos">Todos</button>
+                    <button class="filter-btn" data-filtro="java">Java</button>
+                    <button class="filter-btn" data-filtro="logica">Lógica</button>
+                    <button class="filter-btn" data-filtro="exercicios">Exercícios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vídeos Java -->
+    <section id="videos" class="videos section">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title animate-slide">Vídeos Java Recomendados</h2>
+                <p class="section-description animate-slide delay-1">Conteúdo selecionado para acelerar seu aprendizado</p>
+            </header>
+            <div class="videos-grid" id="videosGrid">
+                <article class="video-card" data-categoria="java" data-texto="java devdojo">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/VKjFuX91G5Q/maxresdefault.jpg" alt="Java com DevDojo" loading="lazy" onerror="this.src='https://img.youtube.com/vi/VKjFuX91G5Q/hqdefault.jpg'">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Java Completo - DevDojo</h3>
+                        <p>Curso completo de Java do básico ao avançado com DevDojo (playlist completa)</p>
+                        <div class="video-meta">
+                            <span>2h+ • Playlist completa</span>
+                            <span>🔥 DevDojo</span>
+                        </div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=VKjFuX91G5Q&list=PL62G310vn6nFIsOCC0H-C2infYgwm8SWW" target="_blank" class="video-cta" rel="noopener">Assistir agora</a>
+                </article>
+
+                <article class="video-card" data-categoria="java" data-texto="java bonieky">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/V5I11DRE-1M/maxresdefault.jpg" alt="Java Roadmap Completo" loading="lazy" onerror="this.src='https://img.youtube.com/vi/V5I11DRE-1M/hqdefault.jpg'">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Java Roadmap Completo</h3>
+                        <p>Roadmap completo - Jovem Tranquilão</p>
+                        <div class="video-meta">
+                            <span>7m+ • Roadmap</span>
+                            <span>⭐ Jovem Tranquilão</span>
+                        </div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=V5I11DRE-1M&t=3s" target="_blank" class="video-cta" rel="noopener">Assistir agora</a>
+                </article>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Vídeos Lógica -->
+    <section class="videos section">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title animate-slide">Vídeos Lógica de Programação</h2>
+                <p class="section-description animate-slide delay-1">Fundamentos que todo programador precisa conhecer</p>
+            </header>
+            <div class="videos-grid">
+                <article class="video-card" data-categoria="logica" data-texto="bonieky logica java">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/epf-WQdVis0/maxresdefault.jpg" alt="Lógica Bonieky" loading="lazy" onerror="this.src='https://img.youtube.com/vi/epf-WQdVis0/hqdefault.jpg'">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Lógica de Programação - Bonieky</h3>
+                        <p>Capítulo de lógica do curso Java completo (timestamp específico)</p>
+                        <div class="video-meta">
+                            <span>3h+ • Capítulo Lógica</span>
+                            <span>⭐ Bonieky Lacerda</span>
+                        </div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=epf-WQdVis0&t=10160s" target="_blank" class="video-cta" rel="noopener">Assistir agora</a>
+                </article>
+
+                <article class="video-card" data-categoria="logica" data-texto="if else estruturas condicionais">
+                    <div class="video-thumbnail">
+                        <img src="https://img.youtube.com/vi/1oEsU9k1n0M/maxresdefault.jpg" alt="Estruturas Condicionais If/Else" loading="lazy" onerror="this.src='https://img.youtube.com/vi/1oEsU9k1n0M/hqdefault.jpg'">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Estruturas Condicionais - If/Else</h3>
+                        <p>Domine if, else if, else e switch com exemplos práticos</p>
+                        <div class="video-meta">
+                            <span>25min • 98% útil</span>
+                            <span>⭐ Lógica Completa</span>
+                        </div>
+                    </div>
+                    <a href="https://www.youtube.com/watch?v=1oEsU9k1n0M" target="_blank" class="video-cta" rel="noopener">Assistir agora</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- FAQ -->
+    <section class="faq section">
+        <div class="container">
+            <header class="section-header">
+                <h2 class="section-title animate-slide">Perguntas Frequentes</h2>
+            </header>
+            <div class="faq-container">
+                <article class="faq-item animate-slide delay-1" tabindex="0">
+                    <div class="faq-question">
+                        <h3>Preciso instalar algo para começar?</h3>
+                        <span class="faq-icon">▶</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Só precisa do <strong>JDK 17 ou superior</strong> e um editor como VS Code, IntelliJ ou Eclipse. Os links estão no footer!</p>
+                    </div>
+                </article>
+
+                <article class="faq-item animate-slide delay-2" tabindex="0">
+                    <div class="faq-question">
+                        <h3>Qual a ordem certa para estudar?</h3>
+                        <span class="faq-icon">▶</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>1. Lógica de Programação → 2. Java Iniciante → 3. Java Intermediário → 4. Trilhas Avançadas</p>
+                    </div>
+                </article>
+
+                <article class="faq-item animate-slide delay-3" tabindex="0">
+                    <div class="faq-question">
+                        <h3>Os exercícios têm gabarito?</h3>
+                        <span class="faq-icon">▶</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Clique em "Ver solução" nos exercícios. Mas tente primeiro sozinho! 💪</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <span class="logo-icon">☕</span>
+                        JavaFácil
+                    </h3>
+                    <p>Sua jornada para se tornar um programador Java profissional</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Recursos Úteis</h4>
+                    <ul>
+                        <li><a href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html" target="_blank" rel="noopener">Baixar JDK 17</a></li>
+                        <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a></li>
+                        <li><a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" rel="noopener">Documentação Java</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Comunidades</h4>
+                    <ul>
+                        <li><a href="https://www.reddit.com/r/javaBrasil/" target="_blank" rel="noopener">r/javaBrasil</a></li>
+                        <li><a href="https://discord.gg/java" target="_blank" rel="noopener">Discord Java</a></li>
+                        <li><a href="#" onclick="scrollToSection('faq')">Dúvidas? FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contato</h4>
+                    <p>contato@javafacil.com.br</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">📱</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                        <a href="#" aria-label="Discord">💬</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 JavaFácil. Feito com ❤️ para a comunidade Java brasileira.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" aria-label="Voltar ao topo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L5 9h3v9h8V9h3z"/>
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="theme.js"></script>
+    <script src="auth.js"></script>
+    <script src="guard.js"></script>
+    <script src="auth-modal.js"></script>
+</body>
+</html>
